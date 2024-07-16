@@ -8,6 +8,7 @@ import {
   networkPredicate,
   routeParser,
 } from "./js/shield_format.js";
+import { debugOptions } from "./debug_config.js";
 
 var getUrl = window.location;
 var baseUrl = getUrl.protocol + "//" + getUrl.host + getUrl.pathname;
@@ -27,6 +28,7 @@ export const map = (window.map = new maplibregl.Map({
 const shields = ShieldDef.loadShields();
 
 const shieldRenderer = new ShieldRenderer(shields, routeParser)
+  .debugOptions(debugOptions)
   .filterImageID(shieldPredicate)
   .filterNetwork(networkPredicate)
   .renderOnMaplibreGL(map);
@@ -67,8 +69,8 @@ let networks = [
   // Basic Angular Shapes
   "CA:ON:secondary",
   "US:NE",
-  "US:MN:Hennepin:Park_Access",
   "CA:MB:Winnipeg",
+  "US:MN:Hennepin:Park_Access",
   "US:PA",
   "US:PA:Turnpike",
 
@@ -119,8 +121,8 @@ let networks = [
   "US:VA",
   "US:PR:primary",
   "HK",
+  "MX:QRO",
   "CA:QC:A",
-  "CA:NS:H",
 
   "NZ:SH",
   "AU:WA:S",
@@ -134,6 +136,7 @@ let networks = [
   "CA:PE",
   "US:FL:Toll",
   "CA:BC",
+  "MX:MX",
   "IN:NH",
   "PK:motorway",
   "US:US",
@@ -151,10 +154,10 @@ let networks = [
 
   // Fancy Rectangles
   "US:AK",
+  "US:ID",
   "US:KY:Parkway",
   "US:MD",
   "US:MN",
-  "US:ID",
   "US:CO",
   "US:CO:E470",
   "US:DC",
@@ -198,6 +201,8 @@ let networks = [
   "CA:ON:primary",
   "CA:ON:primary:Toll",
 
+  "US:SD:Custer:CSP",
+
   // With banners
   "US:I:Truck",
   "US:I:Express",
@@ -213,6 +218,7 @@ let networks = [
   "US:LA:Business",
   "US:MD:Business",
   "US:VT:Alternate",
+  "US:VT:Truck",
   "US:MO:Spur",
   "US:NC:Bypass",
   "US:ND:Alternate",
@@ -255,6 +261,8 @@ let refs = [
   "A 562",
   "1138-2",
   "A26/A7",
+  "GUA 10D",
+  "SS18var",
 ];
 
 export function getShieldCanvas(network, ref, name) {
@@ -300,6 +308,14 @@ const iterShields = function* () {
     refs: ["QEW"],
   };
   yield {
+    network: "CA:ON:Hamilton:Expressway",
+    names: ["Lincoln M. Alexander Parkway", "Red Hill Valley Parkway"],
+  };
+  yield {
+    network: "CA:ON:Toronto:Expressway",
+    refs: ["DV", "G"],
+  };
+  yield {
     network: "GLCT",
     refs: ["LECT", "LHCT", "LMCT", "LSCT"],
   };
@@ -342,6 +358,10 @@ const iterShields = function* () {
   yield {
     network: "US:NH:Turnpike",
     names: ["Blue Star Turnpike", "Everett Turnpike", "Spaulding Turnpike"],
+  };
+  yield {
+    network: "US:NY:Inner_Loop",
+    names: ["Inner Loop"],
   };
 };
 

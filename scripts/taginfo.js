@@ -20,7 +20,7 @@ import {
   routeParser,
   shieldPredicate,
   networkPredicate,
-} from "../src/js/shield_format.js";
+} from "../src/js/shield_format";
 
 await mkdir("dist/shield-sample", { recursive: true });
 
@@ -138,12 +138,11 @@ function addNetworkTags(project) {
         );
 
         switch (shapeDef.drawFunc) {
+          case "pill":
+            prettyShapeName = "pill-shaped";
+            break;
           case "roundedRectangle":
-            if (shapeDef.params.radius == 10) {
-              prettyShapeName = "pill-shaped";
-            } else {
-              prettyShapeName = "rectangular";
-            }
+            prettyShapeName = "rectangular";
             break;
           case "hexagonVertical":
             prettyShapeName = "vertical hexagonal";

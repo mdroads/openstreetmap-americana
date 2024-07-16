@@ -269,6 +269,12 @@ The MUTCD’s standard colors are designed for high-contrast backgrounds and leg
 
 See the [developer tools](dev/README.md) for an importable, Inkscape-compatible palette file.
 
+### Icon Grid Alignment
+
+There is a utility script called icon_grid that will generate a pixel grid on an SVG. This can be used to check how well the icon will align to the pixel grid. Run this utility as follows:
+
+`npm run icon_grid -- icons/poi_fuel.svg`
+
 ### Font Sizes
 
 Shields should target 8-14px text actual-size character heights for readability:
@@ -309,6 +315,8 @@ Additionally, **`refsByName`** is an object mapping way names to text that can b
 `refsByName` only works if there is no `ref` tag and the expression in the `routeConcurrency` function in layer/highway_shield.js includes the `name` property in the image name. The network needs to be listed as an input value that causes the `match` expression to append `name` to the image name.
 
 When using `overrideByRef` or `refsByName`, make sure to add a line to the Special Cases section of this page explaining why it is necessary, as they are only intended for use in special cases.
+
+In the case where all routes in a network should be drawn with the same shield text, set the text value in `ref`.
 
 ### Banners
 
@@ -405,3 +413,7 @@ For consistency, POI icons use the following color palette:
 ## Fonts
 
 Fonts for style labels are packaged and defined in [fontstack66](https://github.com/osm-americana/fontstack66), Americana's font package.
+
+## Render Samples
+
+A GitHub action will check a list of regression test locations to see if the map has changed. If any of those locations have changed visually, the "Map Preview" check will generate before and after images. If your PR changes the visual appearance of the map, add an entry to `test/sample_locations.json` with a location that best illustrates the change. This will help show your change to PR reviewers as well as act as a regression test for future PRs.

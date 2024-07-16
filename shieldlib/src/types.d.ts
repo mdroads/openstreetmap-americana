@@ -1,4 +1,4 @@
-import { StyleImage } from "maplibre-gl";
+import { StyleImage, StyleImageMetadata } from "maplibre-gl";
 export interface RouteDefinition {
   network: string;
   ref: string;
@@ -23,7 +23,12 @@ export interface SpriteProducer {
   getSprite(spriteID: string): StyleImage;
 }
 export interface SpriteConsumer {
-  putSprite(spriteID: string, image: ImageData, pixelRatio: number): void;
+  putSprite(
+    spriteID: string,
+    image: ImageData,
+    options: Partial<StyleImageMetadata>,
+    update: boolean
+  ): void;
 }
 export type SpriteRepository = SpriteProducer & SpriteConsumer;
 export interface ShieldDefinitions {
